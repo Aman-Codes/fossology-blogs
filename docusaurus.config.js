@@ -3,7 +3,7 @@ module.exports = {
   title: 'FOSSology Blogs',
   tagline: 'An open source license compliance software system and toolkit',
   url: 'https://aman-codes.github.io/blogs',
-  baseUrl: '/',
+  baseUrl: '/fossology-blogs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
