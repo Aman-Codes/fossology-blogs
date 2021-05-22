@@ -2,7 +2,7 @@
 module.exports = {
   title: 'FOSSology Blogs',
   tagline: 'An open source license compliance software system and toolkit',
-  url: 'https://fossology.github.io/blogs',
+  url: 'https://aman-codes.github.io/blogs',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -25,7 +25,7 @@ module.exports = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/fossology/fossology',
+          href: 'https://github.com/Aman-Codes/fossology-blogs',
           label: 'GitHub',
           position: 'right',
         },
@@ -65,7 +65,7 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/fossology/fossology',
+              href: 'https://github.com/Aman-Codes/fossology-blogs',
             },
           ],
         },

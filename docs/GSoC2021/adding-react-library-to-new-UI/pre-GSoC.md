@@ -10,7 +10,9 @@ According to the [official website](https://summerofcode.withgoogle.com/), Googl
 
 GSoC is not an internship and should not be considered as a way to earn money. Instead, its main aim is to bring more developers to contribute to open-source projects (even after the GSoC period ends).
 
-![GSoC logo](./images/gsoc.png "Google Summer of Code")
+<p align="center">
+  <img src="./images/gsoc.png" alt="Google Summer of Code"/>
+</p>
 
 ## Why GSoC?
 
