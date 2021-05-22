@@ -7,7 +7,7 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'FOSSology', // Usually your GitHub org/user name.
+  organizationName: 'Aman-Codes', // Usually your GitHub org/user name.
   projectName: 'fossology-blogs', // Usually your repo name.
   themeConfig: {
     navbar: {
