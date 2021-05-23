@@ -1,0 +1,84 @@
+h1. Package Install Automation
+
+This page documents the current state of the package automation.  See [[Package Install Testing]] for details on setting up the virtual machines used to automate the testing.
+
+h2. Overview
+
+The automation makes heavy use of VM features.  A vm snapshot is taken of each vm machine.  After the test is complete (package install and tests run) the vm is __reverted__ to it's previously __fossology not installed__ state.  This allows rapid turnaround of testing.  If this method was not used, a template would have to be inflated into a new vm, the vm would have to be configured for dhcp then brought on-line.
+
+h2. Process Overview
+
+Each step below is a separate job in jenkins.
+
+* Packages are built first.
+* All distro VMs revert to the initial snapshot from fobuild, using the "VMware command line":http://rndwiki.atlanta.hp.com/confluence/display/ospotools/VMware+command-line+interface
+* The packages are installed using a php script running as root on the slaves; and run a cli tests to check installation correct.
+
+h1. Jenkins
+
+Jenkins does a lot of things well.  Like most software it's not perfect.  One of the most annoying things about jenkins (at least using FireFox on linux) is that it often presents stale pages.  When using jenkins, use the refresh button on your browser a lot.  Sometimes turning on 'auto refresh' helps, but not always.   For example, if you are trying to check on the state of slave nodes, you should hit the browser refresh and the refresh status button in jenkins.
+
+You have been warned. :-)
+
+h1. -Automation issues- (Fixed with the VM snapshot with power on and fixed ip)
+
+The issues described here are caused by interactions between the VM's and Jenkins.
+
+* When vm's have their snapshot reverted a number of bad side effects occur:
+** Some vm's lose their IP address randomly.  It doesn't always happen, but it does happen on just a few machines, enough to cause grief.
+** For some reason when the vm's are reverted, their time gets messed up as well.  They often end up days behind the master server.  This causes test failures because the right set of sources don't get checked out (it checks out TOT for that day/time).  So after reverting snapshots human intervention is needed if only just to check on the state of the vm's in relation as to how jenkins sees them.
+** The worst effect of reverting the vm's is that jenkins often then loses contact with them.  It tries to recover and reconnect, but sometimes a number of nodes will still be off line and have to be manually brought back on line using jenkins. 
+
+The current snapshots were taken when the vm was powered off.  This seems to have helped with the time issue, but now all the vm's must be powered on before the test.
+* For some reason, programmatically turning on the vm's causes some number to never power up, (between 3-6).  Even though the return status from the vmware-cmd shows that it was powered on.  When this happens, use the vmware client sofware to power them on.
+
+h2. -Known failures-
+
+Package-Install-Testing is a Matrix Job.  When a matrix job starts it always starts a parent job by picking from the list of nodes at random and starts a __parent job__ on that node.  That job is called **Install-Test**.  That job will almost always fail, and the failure should be ignored.  Looking at the console output, the machine picked is indicated.  When the Install-Test job passes, often the slave with the machine name will fail due to apt/dpkg lock conflicts.  For example, if the Install-Tests picks slave squeze32 to start the parent job and it passes, the slave called squeze32 might pass or it might fail.  In this situation as long as one of them passes, the other failure can be ignored.
+
+The issue is that Jenkins counts the job Install-Test as part of the run... since it fails, even though the packages all install clean and all the other jobs succeed, the complete job is marked failed due to the failure of Install-Test.
+
+h3. -Startup Failures-
+
+**Mandatory Checks**
+
+Before starting up the Package-Install-Test all of the nodes (slaves) should be checked to make sure they are on line and that their time is synchronized to within minutes of each other.  The issues mentioned above make checking the nodes important so that startup failures are minimized.
+
+To check nodes, go to "Jenkins Dashboard":http://fonightly.usa.hp.com:8080 and select the +Manage Jenkins+ link, then on that page select the +Manage Nodes+ link.
+
+* Time is out of sync: login to the machine and run (as root)<code>/etc/init.d/npt restart</code> or if rhel based, <code>service ntpd restart</code> If that doesn't work, reset the date by hand(as root):<code>date mmddhhmmyy</code>
+* machine has lost it's IP, for this the vmware client software should be used to get to the console and restart networking or network-manager(debian/ubuntu).  If that doesn't work, then reboot the machine.  Restarting networking is faster than rebooting.
+
+h1. Instructions for Building Automated Packages
+
++1. Building Test packages+
+
+#  Login in to fossbuild use user 'build'
+#  Run runBuild_v2.0.php –V $version -t
+#  All test packages are generated under http://fossbuild.usa.hp.com/fossology/$version/testing/$date/
+
++2. Building Release packages+
+
+# Use the script under build at fossbuild.usa.hp.com:~/runBuild_v2.0.php
+# Commit all new $version conf files, take 2.0.0 example
+<pre>
+  Check out pbconf/trunk/*
+  Copy pbconf/trunk pbconf/tags/2.0.0
+
+  Change fossology.pb with new svn url
+  Change projver = 2.0.0
+  Change testver fossology = false
+
+  Change fossology/deb/changelog
+  Check in
+</pre>
+# Run runBuild_v2.0.php –V $version
+# All packages generated under http://fossbuild.usa.hp.com/fossology/$version
+# Copy packages to fossology.org/releases directory
+
+h1. Instructions for running Package-Install-Tests
+
+# Make sure the vm's have been reverted to the last snapshot.  This can be done multiple times with no harm.  This can only be done right now using the vm client gui.  Open FossologyVMs folder, open Package Install folder.  For each vm in the folder left click to select then right click and select +Snapshot+ then select +Revert to Current Snapshot+.  This operation does not take long.
+# After reverting all of the vm's will be powered off.  Power them on.  Wait till they are all powered on.
+# Use jenkins and goto to the manage node page (under +Mange Jenkins+ link at top left).  Make sure all the nodes are in time sync and are on-line. See the **Mandatory Checks** above for how to fix these.  If the node need to be 'reattached' to jenkins, it will have a red box with an x in it.  Select the node, you will often have to refresh the node page to get the correct status.  If it's offline, select the Lauch Slave button and make sure it comes back on line.  Iterate through the offline nodes till they are all on-line and in time sync.
+# Go to the jenkins Dashboard (select the +jenkins+ link at the top of a page), Select Package-Install-Tests, when on that page, select Build Now (on the left). When the build displays (refresh the page), select it, you guessed it, refresh the page... look at console output, at some point you will see that remote machines have been scheduled to run.  THe test are now running.

@@ -39,7 +39,3 @@
   display: block;
   margin: auto;
 }
-
-.navbar--fixed-top {
-  z-index: 200 !important;
-}

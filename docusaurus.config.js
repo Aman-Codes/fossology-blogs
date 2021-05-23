@@ -1,6 +1,6 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'FOSSology Blogs',
+  title: 'FOSSology',
   tagline: 'An open source license compliance software system and toolkit',
   url: 'https://aman-codes.github.io/blogs',
   baseUrl: '/fossology-blogs/',
@@ -19,7 +19,7 @@ module.exports = {
       items: [
         {
           type: 'doc',
-          docId: 'intro',
+          docId: 'welcome',
           position: 'left',
           label: 'Documentation',
         },
@@ -39,7 +39,7 @@ module.exports = {
           items: [
             {
               label: 'Documentation',
-              to: '/docs/intro',
+              to: '/docs/welcome',
             },
           ],
         },

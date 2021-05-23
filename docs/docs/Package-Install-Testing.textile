@@ -1,0 +1,97 @@
+h1. Package Install Testing
+
+This page describes the process for testing newly created FOSSology packages suitable for installation on various Linux distributions.  If you are a FOSSOlogy user, and are not doing regular FOSSology software development, you can probably ignore this page.
+
+Package install testing will use virtual machines along with vm templates and snapshots to accomplish the testing in a quick and timely manner.  Snapshots will allow the restore of the system to it's pre-installed state.  This will enable quick turnaround time for testing.
+
+* Note: package creation is documented [[Package-Install-Automation]]*
+
+See the [[Testing-vm-machine-list|list of VM systems]] that are used to test package testing.
+
+
+h2. VM Creation 
+
+* Note: These steps are specific to the FOSSology team's internal VMware vSphere testing environment; if you wish to perform package creation and/or testing within another environment, you may need to modify these steps considerably to match your own environment.
+
+# Use the VM client software (vSphere) to create each vm.  For each vm, load the following additional software:
+#* Jenkins
+#* php (including posix features, and php5-xsl)
+#* subversion, set up subversion servers file for **both** __root__ and __jenkins__
+#* java2-runtime (sun version)
+#* build-essential#
+#* phpUnit "Installing phpUnit":http://www.phpunit.de/manual/current/en/installation.html
+#* cunit
+#* chkconfig (apt-get install chkconfig)
+#* after the os is installed, make sure to use the vm client software to install the vmtools on the machine (highlight the vm, right click, guest-> install....
+(NOTE: doesn't seem to work)
+#* others per distro (see below)
+# After each vm is installed, it is cloned as a template so that full recovery is faster. 
+#  As part of the initial set up, there should already be an existing vm. If needed, convert the template into a VM, see the page [[Converting a VM template to an Install VM]]. 
+# After the vm is working and on the network, take a snapshot (with memory) of it using the vm client software.  Take only 1 snapshot.  For example, the rhel6-132.ostt vm was snapshoted as rhel6.1-32-beforeInstall, with description of "Machine and os state before package install".  
+
+h2. VM Snapshots
+
+As mentioned above, each install test VM should have a snapshot of the system taken.  Use the VShpere client software to accomplish this. Right click on the VM-name.  If no snapshot exists the 'revert to current snapshot' will be greyed out.  If one exists, there no real need to create another.  Snapshots can be used over and over again.  To take a snapeshot, right click the VM-name, select Snapshot, select Take a Snapshot.  Complete the pop-up and wait for the snapshot creation to finish.  Creating a snapshot takes a 2-4 minutes.
+
+
+
+h2. Setting up a Jenkins slave node (the vm)
+
+Jenkins can run jobs on other remote systems.  To do that Jenkins needs to be installed on the system.  The sections below describe how to set up Jenkins on the different flavors of Linux for the purposes of remote execution.  Note that what is described below is not how Jenkins would be installed if it was the __Master__.
+
+h3. Debian/Ubuntu
+
+* install java2-runtime (sun version)
+* install deamon
+<pre>
+sudo apt-get install openjdk-6-jre openjdk-6-jre-headless daemon 
+</pre>
+* download and install "Jenkins":http://jenkins-ci.org/, use the right bar to select the version, we have used the LTS releases with good results.  Currently using 1.424.6(one back from the latest), the latest LTS is 1.447.1.
+
+* Stop Jenkins and reset jenkins user password to _jenkins_.
+* restart jenkins <pre>sudo /etc/init.d/jenkins start</pre>
+* change root passwd to the standard.  Ubuntu systems set it so it must be changed.
+
+
+h3. RedHat/Fedora/CentOS based systems
+
+For all rhel systems, a proxy must be set so yum can reach the outside world.  Modify /etc/yum.conf.
+<pre>proxy=http://lart.usa.hp.com:3128</pre>
+
+h4. Fedora
+
+Fedora is the easiest of the rhel based systems.  It contains the material needed above without having to go to other repos (except jenkins).
+
+* add a proxy to yum (see above)
+* install material:<pre> yum install php php-process emacs subversion</pre>
+
+h4. Fedora, RedHat/Centos systems:
+
+* download jenkins and get the rpm version we want: (use the latest stable LTS)
+<pre>wget  http://mirrors.jenkins-ci.org/redhat-stable-rc/jenkins-1.447.1-1.1.noarch.rpm</pre>
+
+* install it: <pre>rpm -ivh jenkins-1.447.1-1.1.noarch.rpm</pre>
+* change jenkins to have a login: vipw /etc/passwd, change /bin/false to /bin/bash
+* change jenkins user password to 'jenkins'.
+* remove jenkins.repo in /etc/yum.repos.d/, if this is not done, the yum update will fail because we don't have the repo key.  Plus we don't want the latest and greatest jenkins.
+* RetroFit RedHat repos
+** For redhat systems, go to the linux coe page and create a retrofit program and run it on the system to enable the repos needed.
+** if not in any repos configured, get the php-process from centos:
+  32 bit: http://mirror.centos.org/centos/6/os/i386/Packages/php-process-5.3.3-3.el6_1.3.i686.rpm
+  64 bit: http://mirror.centos.org/centos/6/os/x86_64/Packages/php-process-5.3.3-3.el6_1.3.x86_64.rpm
+  This is needed as it has posix routines we need for php. This may complain about not having a RSA/SHA1 signature key.
+** for 1.4.1 p7zip-plugins was also needed. 
+    32 bit: ftp://rpmfind.net/linux/fedora/linux/development/rawhide/i386/os/Packages/p7zip-plugins-9.20.1-2.fc16.i686.rpm
+    64 bit: ftp://ftp.pbone.net/mirror/download.fedora.redhat.com/pub/fedora/epel/6/x86_64/p7zip-plugins-9.20.1-2.el6.x86_64.rpm
+** install php: yum install php
+** install posix support for php: <pre>yum install php-process or rpm -ivh correct-rpm file for system</pre>
+
+* If you can't talk to apache or postgres over the network: Add this to /etc/sysconfig/iptables: <pre>-A INPUT -p tcp -m tcp --sport 80 -j ACCEPT
+-A OUTPUT -p tcp -m tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp --dport 5432 -j ACCEPT</pre>
+
+The above will enable apache and postgres
+
+now as root <pre>/etc/init.d/postgresql start</pre> works.
+
+

@@ -1,0 +1,205 @@
+This is the an overview which was provided once as Excel file in the root directory of the project. It has been moved to this location, because a wiki page seems to be more appropriate for this information.
+
+{| class="wikitable"
+! FOSSology v2 file mapping !!  !!  !! 
+|-
+| . || V 1.4 file || V 2.0 file || Comment
+|-
+| . ||  ||  || 
+|-
+| . || /etc/cron.d/fossology || remove || unused cron for db vacuum
+|-
+| . || /etc/default/fossology || remove || unused initscript defaults
+|-
+| . ||  ||  || 
+|-
+| $SYSCONFDIR || /etc/fossology/Db.conf || keep || 
+|-
+| . || /etc/fossology/Depth.conf || remove || now in fossology.conf
+|-
+| . ||  || /etc/fossology/fossology.conf || new
+|-
+| . || /etc/fossology/Hosts.conf || remove || now in fossology.conf
+|-
+| . || /etc/fossology/Proxy.conf || remove || now in fossology.conf
+|-
+| . || /etc/fossology/RepPath.conf || remove || now in fossology.conf
+|-
+| . || /etc/init.d/fossology || keep || 
+|-
+| . || /etc/logrotate.d/fossology-scheduler-single || keep || 
+|-
+| . ||  || $SYSCONFIDR/mods-enabled/ || links to $MODDIR/{module}
+|-
+| . ||  ||  || 
+|-
+| $BINDIR || /usr/bin/cp2foss || keep || 
+|-
+| . || /usr/bin/departition || keep || 
+|-
+| . || /usr/bin/fo_notify || remove || now a scheduler function
+|-
+| . || /usr/bin/fossinit || keep || 
+|-
+| . || /usr/bin/fossjobs || keep || 
+|-
+| . || /usr/bin/fosslic || keep || 
+|-
+| . ||  ||  || 
+|-
+| $AGENTDIR || /usr/lib/fossology/agents/adj2nest || $MODDIR/adj2nest/agent/adj2nest || remove this variable $AGENTDIR
+|-
+| . || /usr/lib/fossology/agents/buckets || $MODDIR/buckets/agent/buckets || 
+|-
+| . || /usr/lib/fossology/agents/copyright || $MODDIR/copyright/agent/copyright || 
+|-
+| . || /usr/lib/fossology/agents/delagent || $MODDIR/delagent/agent/delagent || 
+|-
+| . || /usr/lib/fossology/agents/engine-shell || remove || not used
+|-
+| . || /usr/lib/fossology/agents/mimetype || $MODDIR/adj2nest/agent/mimetype || 
+|-
+| . || /usr/lib/fossology/agents/nomos || $MODDIR/adj2nest/agent/nomos || 
+|-
+| . || /usr/lib/fossology/agents/pkgagent || $MODDIR/adj2nest/agent/pkgagent || 
+|-
+| . || /usr/lib/fossology/agents/selftest || remove || replaced by scheduler api
+|-
+| . || /usr/lib/fossology/agents/sqlagent || remove || not used
+|-
+| . || /usr/lib/fossology/agents/ununpack || $MODDIR/adj2nest/agent/ununpack || 
+|-
+| . || /usr/lib/fossology/agents/wget_agent || $MODDIR/adj2nest/agent/wget_agent || 
+|-
+| . ||  ||  || 
+|-
+| $LIBEXECDIR || /usr/lib/fossology/checksum || remove || unused
+|-
+| . || /usr/lib/fossology/dbcheck || keep || 
+|-
+| . || /usr/lib/fossology/dbcreate || keep || 
+|-
+| . || /usr/lib/fossology/fo-postinstall || keep || 
+|-
+| . || /usr/lib/fossology/fossinit-licenseref.php || keep || 
+|-
+| . || /usr/lib/fossology/fossologyinit.sql || keep || 
+|-
+| . || /usr/lib/fossology/fossology-scheduler || $MODDIR/scheduler/agent/fo_scheduler || 
+|-
+| . || /usr/lib/fossology/fo_watchdog || remove || N/A
+|-
+| . || /usr/lib/fossology/libschema.php || keep || 
+|-
+| . || /usr/lib/fossology/licenseref.sql || keep || 
+|-
+| . || /usr/lib/fossology/mkschedconf || remove || 
+|-
+| . || /usr/lib/fossology/repcat || remove || unused
+|-
+| . || /usr/lib/fossology/repcopyin || remove || unused
+|-
+| . || /usr/lib/fossology/repexist || remove || unused
+|-
+| . || /usr/lib/fossology/rephost || remove || unused
+|-
+| . || /usr/lib/fossology/repmmapcheck || remove || unused
+|-
+| . || /usr/lib/fossology/reppath || remove || unused
+|-
+| . || /usr/lib/fossology/repremove || remove || unused
+|-
+| . || /usr/lib/fossology/repwrite || remove || unused
+|-
+| . ||  ||  || 
+|-
+| $DOCDIR || $DATAROOTDIR/doc/$PROJECT || keep || 
+|-
+| . || /usr/share/doc/fossology || keep || 
+|-
+| . || /usr/share/doc/fossology-agents-single || keep || 
+|-
+| . || /usr/share/doc/fossology-agents-single/changelog.gz || keep || 
+|-
+| . || /usr/share/doc/fossology-agents-single/copyright || keep || 
+|-
+| . || /usr/share/doc/etc... || keep || 
+|-
+| . || /usr/share/fossology || remove || 
+|-
+| . || /usr/share/fossology/copyright.dic || moved to $MODDIR/copyright/agent || 
+|-
+| . || /usr/share/fossology/names.dic || moved to $MODDIR/copyright/agent || 
+|-
+| . ||  || remove variable || 
+|-
+| $PHPDIR || /usr/share/fossology/php/pathinclude.php || moved to $MODDIR/www/ui || 
+|-
+| . ||  ||  || 
+|-
+| $WEBDIR || /usr/share/fossology/www/common/ || $MODDIR/lib/php/ || 
+|-
+| . || /usr/share/fossology/www/csshover.htc || $MODDIR/www/ui/css/csshover.htc || 
+|-
+| . || /usr/share/fossology/www/fossology.css || $MODDIR/www/ui/css/fossology.css || 
+|-
+| . || /usr/share/fossology/www/i18n.php || $MODDIR/www/ui/i18n.php || 
+|-
+| . || /usr/share/fossology/www/images/ || $MODDIR/www/ui/images/ || 
+|-
+| . || /usr/share/fossology/www/index.php || $MODDIR/www/ui/index.php || 
+|-
+| . || /usr/share/fossology/www/locale || $MODDIR/www/ui/local || 
+|-
+| . || /usr/share/fossology/www/plugins || remove || 
+|-
+| . || /usr/share/fossology/www/plugins/ui_browse.php || $MODDIR/www/ui/ui_browse.php || 
+|-
+| . || /usr/share/fossology/www/plugins/etc... || $MODDIR/www/ui/… || 
+|-
+| . ||  ||  || 
+|-
+| . || /usr/share/lintian/overrides || keep || 
+|-
+| . || /usr/share/lintian/overrides/fossology-agents-single || keep || 
+|-
+| . || /usr/share/lintian/overrides/fossology-common || keep || 
+|-
+| . ||  ||  || 
+|-
+| $MAN1DIR || /usr/share/man/man1/cp2foss.1.gz || keep || 
+|-
+| . || /usr/share/man/man1/fo_notify.1.gz || remove || 
+|-
+| . || /usr/share/man/man1/fossjobs.1.gz || keep || 
+|-
+| . || /usr/share/man/man1/fosslic.1.gz || keep || 
+|-
+| . ||  ||  || 
+|-
+| $DATAROOTDIR || $PREFIX/share || same as 1.4 || 
+|-
+| $DATADIR || $DATAROOTDIR/fossology || replaced by $MODDIR to be more descriptive || 
+|-
+| $MODDIR ||  || New variable: Root directory of fossology modules, same as DATADIR || 
+|-
+| $REPODIR || /srv/$PROJECT || keep || 
+|-
+| $LOGDIR || /var/log/$PROJECT || keep || In 2.0, this is the scheduler log, not agent log
+|-
+| . ||  ||  || 
+|-
+| $PROJECTSTATEDIR || /var/lib/fossology ||  || 
+|-
+| . || /var/lib/fossology/agents || remove || 
+|-
+| . || /var/lib/fossology/bucketpools || /srv/fossology/bucketpools || According to FHS "/var contains variable data files. This includes spool directories and files, administrative and logging data, and transient and temporary files."
+|-
+| . ||  ||  || Therefore, this seems to be the wrong place for bucketpool scripts and data files.
+|-
+| . ||  ||  || bucketpool files can be data, or an executable.  I've never seen an executable that wasn't a script, 
+|-
+| . ||  ||  || so for practical purposes, the bucketpool files are shareable non-architecture specific files.
+|-
+| $FOSRCDIR ||  || change to $MODDIR || this was introduced in 2.0 but we should use $MODDIR instead
+|}

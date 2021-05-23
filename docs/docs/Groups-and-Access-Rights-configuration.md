@@ -1,0 +1,1 @@
+This page has two parts: Groups and access rights confirguation at Version 3.3 The current state has some different mechanisms which underwent evolution and thus might be perceived not natural in effect. The second part is about the desired state.
