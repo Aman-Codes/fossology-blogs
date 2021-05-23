@@ -1,0 +1,1 @@
+(self.webpackChunkfossology_blogs=self.webpackChunkfossology_blogs||[]).push([[516],{1999:function(s){"use strict";s.exports=JSON.parse('{"allTagsPath":"/fossology-blogs/blog/tags","slug":"g-so-c-2021","name":"gsoc 2021","count":1,"permalink":"/fossology-blogs/blog/tags/g-so-c-2021"}')}}]);

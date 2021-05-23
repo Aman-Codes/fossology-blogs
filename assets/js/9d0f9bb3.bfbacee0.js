@@ -1,0 +1,1 @@
+(self.webpackChunkfossology_blogs=self.webpackChunkfossology_blogs||[]).push([[853],{1069:function(s){"use strict";s.exports=JSON.parse('{"allTagsPath":"/fossology-blogs/blog/tags","slug":"ui","name":"ui","count":1,"permalink":"/fossology-blogs/blog/tags/ui"}')}}]);

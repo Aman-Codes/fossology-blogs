@@ -2,11 +2,18 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://aman-codes.github.io/blogs/blog</id>
     <title>FOSSology Blogs Blog</title>
-    <updated>2019-05-30T00:00:00.000Z</updated>
+    <updated>2021-05-23T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://aman-codes.github.io/blogs/blog"/>
     <subtitle>FOSSology Blogs Blog</subtitle>
     <icon>https://aman-codes.github.io/blogs/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Pre-GSoC Journey]]></title>
+        <id>Pre-GSoC-journey</id>
+        <link href="https://aman-codes.github.io/blogs/fossology-blogs/blog/Pre-GSoC-journey"/>
+        <updated>2021-05-23T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[What is Google Summer of Code (GSoC)?]]></summary>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Welcome]]></title>
         <id>welcome</id>
@@ -20,12 +27,5 @@
         <link href="https://aman-codes.github.io/blogs/fossology-blogs/blog/hello-world"/>
         <updated>2019-05-29T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Welcome to this blog. This blog is created with Docusaurus 2 alpha.]]></summary>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hola]]></title>
-        <id>hola</id>
-        <link href="https://aman-codes.github.io/blogs/fossology-blogs/blog/hola"/>
-        <updated>2019-05-28T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet]]></summary>
     </entry>
 </feed>

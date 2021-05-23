@@ -4,9 +4,16 @@
         <title>FOSSology Blogs Blog</title>
         <link>https://aman-codes.github.io/blogs/blog</link>
         <description>FOSSology Blogs Blog</description>
-        <lastBuildDate>Thu, 30 May 2019 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 23 May 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Pre-GSoC Journey]]></title>
+            <link>https://aman-codes.github.io/blogs/fossology-blogs/blog/Pre-GSoC-journey</link>
+            <guid>Pre-GSoC-journey</guid>
+            <pubDate>Sun, 23 May 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[What is Google Summer of Code (GSoC)?]]></description>
+        </item>
         <item>
             <title><![CDATA[Welcome]]></title>
             <link>https://aman-codes.github.io/blogs/fossology-blogs/blog/welcome</link>
@@ -20,13 +27,6 @@
             <guid>hello-world</guid>
             <pubDate>Wed, 29 May 2019 00:00:00 GMT</pubDate>
             <description><![CDATA[Welcome to this blog. This blog is created with Docusaurus 2 alpha.]]></description>
-        </item>
-        <item>
-            <title><![CDATA[Hola]]></title>
-            <link>https://aman-codes.github.io/blogs/fossology-blogs/blog/hola</link>
-            <guid>hola</guid>
-            <pubDate>Tue, 28 May 2019 00:00:00 GMT</pubDate>
-            <description><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet]]></description>
         </item>
     </channel>
 </rss>
