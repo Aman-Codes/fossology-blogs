@@ -1,5 +1,11 @@
 ---
-sidebar_position: 1
+slug: Pre-GSoC-journey
+title: Pre-GSoC Journey
+author: Aman Dwivedi
+author_title: GSoC 2021 student developer at FOSSology
+author_url: https://aman-codes.github.io/
+author_image_url: https://avatars.githubusercontent.com/u/54680709
+tags: [GSoC 2021, UI]
 ---
 
 # Pre-GSoC journey
