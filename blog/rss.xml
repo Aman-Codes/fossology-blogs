@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
     <channel>
-        <title>FOSSology Blogs Blog</title>
+        <title>FOSSology Blog</title>
         <link>https://aman-codes.github.io/blogs/blog</link>
-        <description>FOSSology Blogs Blog</description>
+        <description>FOSSology Blog</description>
         <lastBuildDate>Sun, 23 May 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>

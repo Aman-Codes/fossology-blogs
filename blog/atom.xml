@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://aman-codes.github.io/blogs/blog</id>
-    <title>FOSSology Blogs Blog</title>
+    <title>FOSSology Blog</title>
     <updated>2021-05-23T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://aman-codes.github.io/blogs/blog"/>
-    <subtitle>FOSSology Blogs Blog</subtitle>
+    <subtitle>FOSSology Blog</subtitle>
     <icon>https://aman-codes.github.io/blogs/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Pre-GSoC Journey]]></title>
